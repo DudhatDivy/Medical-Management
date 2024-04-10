@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      referrerpolicy="no-referrer"
+      rel="stylesheet"
+    />
+
+    <link
+      href="/static/images/medical-symbol (1).png"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <link href="static/styles/addpurchase.css" rel="stylesheet" />
+    <link href="static/styles/leftdashboard.css" rel="stylesheet" />
+    <link href="static/styles/header.css" rel="stylesheet" />
+    <link href="static/styles/footer.css" rel="stylesheet" />
+
+    <title>Add Purchase</title>
+  </head>
+  <body>
+    <div class="container">
+      {% include "header.html" %}
+      <hr />
+      <center>
+         {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+               {% for  category, message  in messages %}
+                    <p class={{category}} >{{ message }}</p>
+               {% endfor %}
+         {% endif %}
+      {% endwith %}
+      </center>
+      <div class="dashboard-div">
+        {% include "dashboardleft.html" %}
+
+        <div class="dashboard-right">
+          <h1>Add New Purchase</h1>
+          <form action="/addpurchase" method="post">
+            <input
+                    required
+              type="name"
+              placeholder="Type name where purchase"
+              name="where_purchase"
+            />
+            <input
+                    required
+              type="number"
+              placeholder="Type  how much purchase"
+              name="total_purchase"
+            />
+            <div class="select">
+                <select required name="payment_type" id="format">
+                  <option selected disabled>Choose a payment type</option>
+                  <option value="cash">cash</option>
+                  <option value="upi">upi</option>
+                  <option value="pending">pending</option>
+                </select>
+            </div>
+            <button class="addmedicine-btn" type="submit">Add</button>
+          </form>
+        </div>
+      </div>
+      <hr />
+      {% include "footer.html" %}
+    </div>
+  </body>
+</html>
+

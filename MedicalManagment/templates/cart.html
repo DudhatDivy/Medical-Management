@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      referrerpolicy="no-referrer"
+      rel="stylesheet"
+    />
+
+    <link
+      href="/static/images/medical-symbol (1).png"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <link href="/static/styles/leftdashboard.css" rel="stylesheet" />
+    <link href="/static/styles/header.css" rel="stylesheet" />
+    <link href="/static/styles/footer.css" rel="stylesheet" />
+    <link href="/static/styles/cart.css" rel="stylesheet" />
+
+    <title>Cart</title>
+  </head>
+  <body>
+    <div class="container">
+      {% include "header.html" %}
+      <hr />
+      <center>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+               {% for  category, message  in messages %}
+                    <p class={{category}} >{{ message }}</p>
+               {% endfor %}
+         {% endif %}
+      {% endwith %}
+      </center>
+      <div class="dashboard-div">
+        {% include "dashboardleft.html" %}
+
+        <div class="dashboard-right">
+          <div class="medicine-detail">
+            <table>
+              <tr>
+                <th class="head-th small-th">Name</th>
+                <th class="head-th">Price</th>
+                <th class="head-th small-th">Quantity</th>
+                <th class="head-th">Remove From Cart</th>
+                <th class="head-th small-th">Increase</th>
+                <th class="head-th small-th">Decrease</th>
+                <th class="head-th">Total</th>
+              </tr>
+
+              {% for item in cart_arr %}
+
+              <tr>
+                <th value="{{item.name}}">{{item.name}}</th>
+                <th>{{item.price}}</th>
+                <th class="small-th">{{item.quantity}}</th>
+                <th class="small-th">
+                  <form action="/cartremove/{{item.medicine_id}}" method="get">
+                    <button type="submit">
+                      <i class="fa-regular fa-square-minus"></i>
+                    </button>
+                  </form>
+                </th>
+                <th class="small-th">
+                  <form action="/increase/{{item.medicine_id}}" method="get">
+                    <button type="submit">
+                      <i class="fa-solid fa-plus"></i>
+                    </button>
+                  </form>
+                </th>
+                <th class="small-th">
+                  <form action="/decrease/{{item.medicine_id}}" method="get">
+                    <button type="submit">
+                      <i class="fa-solid fa-minus"></i>
+                    </button>
+                  </form>
+                </th>
+                <th>{{item.quantity * item.price}}</th>
+              </tr>
+              {% endfor %}
+            </table>
+      {% set my_list =cart_arr %}
+          {% if my_list|length == 0 %}
+                <p class="table-p" >No Item In Cart</p>
+          {% endif %}
+
+
+
+            <div class="all-total-div">
+
+            <p class="subtotal-p">
+              <span>Total Bill </span> <span id="myP"> {{total_bill}}</span>
+            </p>
+            <p class="subtotal-p">
+              <span>Discount(%)  </span> <span id="dis-cal" >-0 </span>
+            </p>
+            <hr class="subtotal-hr" />
+
+            <p class="subtotal-p">
+              <span>Final Bill </span
+              ><span id="discount-cal">{{total_bill}}</span>
+            </p>
+              </div>
+          </div>
+          <div>
+             <form action="/buy" method="post">
+             <input
+                    required
+              id="discount"
+              name="discount"
+              oninput="calculate_discount()"
+              placeholder="Enter Discount in %"
+              type="number"
+            />
+            <h1>Customer Details</h1>
+
+              <input
+                      required
+                name="customer_name"
+                placeholder="Type your customer Name"
+                type="name"
+              />
+              <div class="select-dropdown">
+                <select required name="payment_mode">
+                  <option selected  disabled >Type of pay</option>
+                  <option value="Cash">Cash</option>
+                  <option value="UPI">UPI</option>
+                  <option value="Pending">Pending</option>
+                </select>
+              </div>
+              <input required type="date" name="invoice-date" id="datePicker" />
+              <button class="buy-btn" type="submit">Buy</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <hr />
+      {% include "footer.html" %}
+    </div>
+  </body>
+  <script>
+    function calculate_discount() {
+      let html = document.getElementById('myP').innerHTML;
+      let discount = document.getElementById('discount').value;
+      console.log(discount + "   " + html);
+
+      let calculation = html - html * (discount / 100);
+      let discountcal = html * (discount / 100);
+      document.getElementById('discount-cal').innerHTML =
+        Math.ceil(calculation);
+
+        document.getElementById('dis-cal').innerHTML =
+        Math.ceil((discountcal)*-1);
+    }
+    document.getElementById('datePicker').valueAsDate = new Date();
+  </script>
+</html>

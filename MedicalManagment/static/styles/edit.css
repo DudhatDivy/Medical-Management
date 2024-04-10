@@ -1,0 +1,113 @@
+* {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+background-color: #2b4162;
+background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-title {
+    margin: 15px 0px;
+    color: #fff;
+}
+
+form button {
+    width: 100px;
+    height: 30px;
+    border-radius: 7px;
+    margin: 20px 0px;
+    margin-left: 80px;
+    cursor: pointer;
+}
+
+
+
+.massage-div {
+    color: #000;
+    background-color: #fff;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px;
+    height: 30px;
+    border-radius: 7px;
+    animation: hideMe 3s forwards;
+}
+
+@keyframes hideMe {
+    0% {
+        opacity: 1;
+    }
+
+    99.99% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+hr {
+    margin: 20px 100px;
+}
+
+
+.dashboard-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 84%;
+    margin-left: 90px;
+    margin-top: 59px;
+}
+
+.addmedicine-btn {
+    margin: 0;
+}
+
+input {
+    height: 30px;
+    width: 300px;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 7px;
+    margin: 15px 0px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+::placeholder {
+    color: white;
+    padding-left: 10px;
+}
+
+input,
+select,
+textarea {
+    color: #fff;
+}
+
+textarea:focus,
+input:focus {
+    color: #fff;
+}
+
+form button {
+    width: 100px;
+    height: 30px;
+    border-radius: 7px;
+    margin: 20px 0px;
+    margin-left: 80px;
+    cursor: pointer;
+}

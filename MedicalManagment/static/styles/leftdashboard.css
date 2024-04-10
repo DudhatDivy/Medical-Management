@@ -1,0 +1,44 @@
+
+.dashboard-div {
+    display: flex;
+    color: #fff;
+    flex-direction: row;
+}
+
+.dashboard-left img {
+
+    width: 80px;
+    height: 80px;
+    border-radius: 39px;
+}
+
+.dashboard-left {
+    width: 200px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+.page-a {
+    text-decoration: none;
+    color: dimgrey;
+}
+
+.dashboard-left h1 {
+    font-size: 28px;
+    margin: 10px 0px;
+    text-align: center;
+}
+
+
+.invoice-dropdown{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.invoice-dropdown a {
+ text-decoration: none;
+    color: white;
+    margin: 10px 0px;
+}
